@@ -1,5 +1,7 @@
-# Max and Alex
-# All rights reserved.
+/* 
+ * Max and Alex
+ * All rights reserved.
+ */
 
 append([], Y, [Y]). 
 append([H|T], Y, [H|Z]) :- append(T, Y, Z).
@@ -42,3 +44,21 @@ truncate([_|T], S, E, R) :- S1 is S - 1,
 			    truncate(T, S1, E1, R).
  
 isEmpty([]).
+
+/* Sort */
+
+internalOrderInsert([], X, Acc, Z) :- appendRange(Acc, [X] , Z).
+internalOrderInsert([H|T], X, Acc, Z) :- X > H,
+    					appendRange(Acc, [H], Acc1),
+    					internalOrderInsert(T, X, Acc1, Z).
+internalOrderInsert([H|T], X, Acc, Z) :- X =< H,
+    					appendRange(Acc, [X|[H|T]], Z).
+  
+orderInsert([H|T], X, Z) :- internalOrderInsert([H|T], X, [], Z).
+    					   
+innerSort([], Acc, Acc).
+innerSort([H|T], Acc, Z) :- orderInsert(Acc, H, Acc1),
+    			    innerSort(T, Acc1, Z).
+
+mySort([], []).
+mySort([H|T], Z) :- innerSort(T, [H], Z).
