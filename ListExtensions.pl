@@ -1,3 +1,6 @@
+# Max and Alex
+# All rights reserved.
+
 append([], Y, [Y]). 
 append([H|T], Y, [H|Z]) :- append(T, Y, Z).
 
