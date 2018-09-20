@@ -14,8 +14,8 @@ contains(X,[X|_]).
 contains(X,[_|T]) :- contains(X,T). 
 
 subContains([], _). 
-subContains([H|T], [H|T]) :- subContains(T, T). 
-subContains(X, [_|T])     :- subContains(X, T).
+subContains([Hx|Tx], [Hx|T]) :- subContains(Tx, T). 
+subContains(X, [_|T])        :- subContains(X, T).
 
 insert(L, 0, X, [X|L]). 
 insert([Hl|Tl], I, X, [Hl|R]) :- I1 is I - 1, 
